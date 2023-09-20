@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    <link 
+  href="https://fonts.googleapis.com/css?family=Press+Start+2P" 
+  rel="stylesheet">
+
+    <style>
+       * {
+        margin: 0;
+        padding: 0;
+       }
+
+       #header {
+
+            text-align: center; 
+            height: 80px;
+            line-height: 80px;
+            background-color: whitesmoke;
+        }
+
+        #headerTagA {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 2;
+            font-size: 30px;
+        }
+        a {
+            color: lightsteelblue;
+            text-decoration: none;
+        }
+
+        #center {
+            margin: 0 auto;
+            text-align: center;
+        }
+        #myTetris {
+            border-collapse: collapse;
+            background-color: rgb(92, 92, 92);;
+        }
+        #myTetris td {
+            border: 1px solid rgb(92, 92, 92);
+            width: 15px;
+            height: 15px;
+        }
+        .wall    { 
+            padding: 10px;
+            text-align: center;
+            background-color: rgb(78, 78, 78);
+            border: 1px solid rgb(92, 92, 92);
+            transform: perspective(1000px) rotateX(3deg);
+            box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5) inset, -2px -2px 5px rgba(0, 0, 0, 0.5) inset;
+         }
+        .green   { background-color: green; 
+                    transform: perspective(1000px) rotateX(3deg);
+                    box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5) inset, -1px -1px 5px rgba(0, 0, 0, 0.5) inset;
+                }
+        .red     { 
+            background-color: red;
+            transform: perspective(1000px) rotateX(3deg);
+            box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5) inset, -1px -1px 5px rgba(0, 0, 0, 0.5) inset;
+         
+        }
+        .purple  { background-color: purple; 
+                    transform: perspective(1000px) rotateX(3deg);
+                    box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5) inset, -1px -1px 5px rgba(0, 0, 0, 0.5) inset;
+        }
+        .orange  { background-color: orange; 
+                    transform: perspective(1000px) rotateX(3deg);
+                    box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5) inset, -1px -1px 5px rgba(0, 0, 0, 0.5) inset;
+        }
+        .blue    { background-color: blue; 
+                    transform: perspective(1000px) rotateX(3deg);
+                    box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5) inset, -1px -1px 5px rgba(0, 0, 0, 0.5) inset;
+        }
+        .yellow  { background-color: yellow; 
+                    transform: perspective(1000px) rotateX(3deg);
+                    box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5) inset, -1px -1px 5px rgba(0, 0, 0, 0.5) inset;
+        }
+        .skyblue { background-color: skyblue; 
+                    transform: perspective(1000px) rotateX(3deg);
+                    box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.3) inset, -1px -1px 5px rgba(0, 0, 0, 0.3) inset;
+        }
+        .black   { background-color: black; 
+                    transform: perspective(1000px) rotateX(3deg);
+                    box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.5) inset, -1px -1px 5px rgba(0, 0, 0, 0.5) inset;
+        }
+        #next {
+            width: auto;
+            height: auto;
+            border: 0px;
+
+        }
+        #next td {
+            width:20px;
+            height: 20px;
+        }
+        #next tr {
+            width: auto;
+            height: auto;
+        }
+        #hold {
+
+            border: 1px solid black;
+            font-family: 'Press Start 2P', cursive;
+            margin-right: 20px;
+            font-size: 20px;
+            
+            
+        }
+        #hold td {
+            width:20px;
+            height: 20px;
+        }
+ 
+        #tetris {
+            width: 800px;
+            height: 800px;
+            margin: 0px auto;
+        }
+
+        #left {
+            float: left;
+            width: 130px;
+        }
+        #center {
+            float: left;
+            width: 450px;
+        }
+        #right {
+            margin-left: 20px;
+            float: left;
+        }
+        .centerFont {
+            font-size: 30px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        .rigthFont {
+            font-size: 15px;
+            font-family: 'Press Start 2P', cursive;
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+        #holdPosition {
+            margin-top: 80px;
+        }
+        #tetrisCenter {
+            position: relative; 
+            text-align: center;
+            vertical-align: middle; 
+            height: 100%; 
+        }
+
+        #pause {
+            position: absolute; 
+            width: 430px;
+            top: 20%;
+            margin-left: 0.6%;
+            z-index: 2;
+            display: none;
+            opacity: 80%;
+
+        }
+
+        #center table {
+            position: relative;
+            z-index: 1;
+        }
+        #gameCenter {
+            width: 440px;
+            margin: 0px auto;
+        }
+        
+
+        
+
+    </style>
+
+</head>
+<body style="width: 1900px;">
+    <!-- ---------------------------- header start ----------------------------- -->
+    <div id="header">
+        <h3><a href="index.html" id = "headerTagA">MINI GAME PROJECT</a></h3>
+    </div>
+
+    <hr width="100%" color="black" size="1" style="margin: 0px auto;">
+    <br>
+    <!-- ---------------------------- header finish ----------------------------- -->
+    <div id = "tetris">
+        <div id = "left">
+            <table border="1" id = "hold">
+                <tr id = "holdPosition">
+                    <p class ="rigthFont">Hold</p>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+            </table>
+        </div>
+        <div id = "center">
+            <img src="/tetris_image/화면 캡처 2023-09-14 111254.png" id = "pause">
+            <table id="gameCenter">
+                <tr>
+                    <td id="tetrisCenter"></td>
+                </tr>
+            </table>
+        </div>
+        <div id = "right">
+            <p class = "centerFont">TETRIS</p>
+            <p class= "rigthFont">Score : <span id = "score">0</span></p>
+            <p class= "rigthFont">Level : <span id = "lv">1</span></p>
+            <p class= "rigthFont">Line : <span id = "line">0</span></p>
+            <table border="1" id = "side">
+                <tr>
+                    <td id = "next"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</table>  
+</div>
+
+    <script src="tetris01.js"></script>
+</body>
+</html>

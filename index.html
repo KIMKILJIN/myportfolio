@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gameList {
+            position: relative;
+            box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+            transition: bottom 1000ms ease-in, box-shadow 1000ms ease-in;
+            cursor: pointer;
+            width: calc(33.33% - 20px);
+            margin-bottom: 80px;
+            margin-right: 80px;
+            width: 230px;
+            height: 190px;
+        }
+
+        .gameList:hover {
+            bottom: 5px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+        }
+
+        img {
+            margin-top: -30px;
+            padding-top: 50px;
+            width: 130px;
+            height: 150px;
+        }
+
+        #gameCenter {
+            padding: 100px 20px;
+            max-width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: auto;
+            letter-spacing: -0.04em;
+            align-items: baseline;
+            padding-left: 10%;
+            justify-content: flex-start;
+        }
+
+        
+        body {
+            background-color: whitesmoke;
+        }
+
+        .gameName {
+            padding-top: 5px;
+            font-weight: bold;
+            font-size: 19px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .sub_Title {
+            margin-top: 7px;
+            font-size: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        
+        
+        #center {
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        #left {
+            width: 200px;
+            height: 100%;
+            background-color: white;
+            margin-right: 10%;
+            color: black;
+        }
+        html, body {
+            height: 100%;
+        }
+        
+        #leftTable {
+            border-collapse: collapse;
+            margin-top: 100px;
+            align-items: center;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        
+        #leftTable td{
+            padding-bottom: 15%;
+        }
+        
+        
+        .leftImage {
+            width: 20%;
+            height: 20%;
+        }
+
+       #header {
+
+            text-align: center; 
+            height: 80px;
+            line-height: 80px;
+            background-color: whitesmoke;
+        }
+
+        #headerTagA {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 2;
+            font-size: 30px;
+        }
+       
+    </style>
+
+</head>
+<body>
+
+    <!-- ---------------------------- header start ----------------------------- -->
+    <div id="header">
+        <h3><a href="index.html" id = "headerTagA">MINI GAME PROJECT</a></h3>
+    </div>
+
+    <hr width="100%" color="black" size="1" style="margin: 0px auto;">
+    <br>
+    <!-- ---------------------------- header finish ----------------------------- -->
+    
+    <div align="center" id = "center">
+        
+		<main id = "gameCenter">
+			<article class="gameList">
+		        <a href="tictactoe.html">
+                    <figure class="game__image">
+                        <img alt="#" src="images/tic-tac-toe.png">
+                        <figcaption class = "gameName">TIC-TAC-TOE</figcaption>
+                        <p class = "sub_Title">빙고를 완성해보세요.</p>
+                    </figure>
+                </a>
+	        </article>
+	        
+			<!-- <article class="gameList">
+		        <a href="speedGame.html">
+		        <figure class="game__image">
+                    <img alt="#" src="images/50.png">
+		        	<figcaption class = "gameName">1 to 50</figcaption>
+                    <p class = "sub_Title">1부터 50까지의 숫자를 빠르게 눌러보세요.</p>
+		        </figure>
+                </a>
+	        </article> -->
+	        
+			<article class="gameList">
+		        <a href="numberSlide.html">
+		        <figure>
+		        	<img alt="#" src="images/slideGame.png">
+		        	<figcaption class = "gameName">Number Slide</figcaption>
+                    <p class = "sub_Title">숫자를 순서대로 배치해보세요.</p>
+
+                    </a>
+		        </figure>
+	        </article>
+	        
+			<article class="gameList">
+		        <a href="경마게임.html">
+		        <figure>
+		        	<img alt="#" src="images/horse.png">
+		        	<figcaption class = "gameName">Horse Racing</figcaption>
+                    <p class = "sub_Title">어떤 말이 가장 빠를까요?</p>
+                    
+                    </a>
+		        </figure>
+	        </article>
+	        
+			<article class="gameList">
+                <a href="2048게임.html">
+		        <figure>
+                    <img alt="#" src="images/2048.png">
+		        	<figcaption class = "gameName">2048</figcaption>
+                    <p class = "sub_Title">2048블록을 완성해보세요.</p>
+		        </figure>
+                </a>
+	        </article>
+	        
+			<article class="gameList">
+                <a href="소코반게임.html">
+		        <figure>
+                    <img alt="#" src="images/SOKOBAN.png">
+		        	<figcaption class = "gameName">SOKOBAN</figcaption>
+                    <p class = "sub_Title">치즈를 집으로 가져가세요.</p>
+		        </figure>
+                </a>
+	        </article>
+	        
+			<article class="gameList">
+                <a href="tetris01.html">
+		        <figure>
+                    <img alt="#" src="images/tetris.png">
+		        	<figcaption class = "gameName">TETRIS</figcaption>
+                    <p class = "sub_Title">테트리스를 즐겨보세요</p>
+		        </figure>
+                </a>
+	        </article>
+	        
+			<article class="gameList">
+                <a href="chess.html">
+		        <figure>
+                    <img alt="#" src="images/chess.png">
+		        	<figcaption class = "gameName">CHESS</figcaption>
+                    <p class = "sub_Title">상대방의 킹을 잡아보세요.</p>
+		        </figure>
+                </a>
+	        </article>
+		</main>			
+	</div>
+
+</body>
+</html>

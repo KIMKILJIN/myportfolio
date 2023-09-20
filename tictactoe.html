@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+       #header { 
+            text-align: center; 
+            height: 80px;
+            line-height: 80px;
+            background-color: whitesmoke;
+        }
+
+        #headerTagA {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 2;
+            font-size: 30px;
+        }
+        a {
+            color: lightsteelblue;
+            text-decoration: none;
+        }
+
+        table, tr td{
+
+            margin: 0px auto;
+        }
+        td {
+            text-align: center;
+            border: 2px solid lightsteelblue;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 35px;
+            border-radius: 3px;
+            
+        }
+        div {
+            text-align: center;
+        }
+        span {
+            color: red;
+            font-weight: bold;
+        }
+        .resultPrint {
+            font-size: 10px;
+        }
+        #reset {
+            width: 40px;
+            height: 20px;
+            font-size: 5px;
+        }
+        #btn {
+            margin-top: 20px;
+            width: 258px;
+            height: 40px;
+            border: 0px;
+            border-radius: 3px;
+            background-color : lightsteelblue;
+            color : white;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        h1 {
+            color : black;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- ---------------------------- header start ----------------------------- -->
+    <div id="header">
+        <h3><a href="index.html" id = "headerTagA">MINI GAME PROJECT</a></h3>
+    </div>
+
+    <hr width="100%" color="black" size="1" style="margin: 0px auto;">
+    <br>
+    <!-- ---------------------------- header finish ----------------------------- -->
+    
+    
+    <div class = "div1" id = "a"><h1>Tic Tac Toe</h1></div>
+    <div class = "div1" id = "b"></div>
+    <div class = "div1" id = "c"></div>
+
+    <script>
+        let $table = document.createElement("table")
+        let size = 3;
+        let cnt = 0;
+
+        function load() {
+            $table2 = document.createElement("table")
+
+            for(i = 0; i < size; i++) {
+                let $tr = document.createElement("tr")
+                for(j = 0; j < size; j++) {
+                    let $td = document.createElement("td");
+                    $td.id = "td";
+                    $td.addEventListener("click", clickEvent);
+                    $tr.append($td);
+                }
+                $table.append($tr);
+            }
+            document.querySelector("#b").append($table);
+        }
+
+        let turn = true
+        function clickEvent() {
+            for(i = 0; i < size; i++) {
+                for(j = 0; j < size; j++) {
+                    if(this == $table.children[i].children[j] && $table.children[i].children[j].innerText == "") {
+                        if(turn) {
+                            $table.children[i].children[j].innerText = "O";
+                            $table.children[i].children[j].style.color = "#F05650";
+
+                            cnt++;
+                        }
+                        else {
+                            $table.children[i].children[j].innerText = "X";
+                            $table.children[i].children[j].style.color = "#80CEE1";
+
+                            cnt++;
+                        }
+                        turn = !turn
+                    }
+                }
+            }
+            result()
+        }
+        
+        let count = 0;
+        let winner = 0
+        function result() {
+            //플레이어 O 승리 조건
+            for(i = 0; i < size; i++) {
+                for(j = 0; j < size; j++) {
+                    if($table.children[i].children[j].innerText == "O") {
+                        count++;
+                        if(count == 3) {
+                            winner = 1;
+                            break;
+                        }
+                    } 
+                }
+                count = 0;
+            }
+            for(i = 0; i < size; i++) {
+                for(j = 0; j < size; j++) {
+                    if($table.children[j].children[i].innerText == "O") {
+                        count++;
+                        if(count == 3) {
+                            winner = 1;
+                            break;
+                        }
+                    } 
+                }
+                count = 0;
+            }
+
+            if(($table.children[0].children[0].innerText == "O" && $table.children[1].children[1].innerText == "O" && $table.children[2].children[2].innerText == "O")
+             || ($table.children[2].children[0].innerText == "O" && $table.children[1].children[1].innerText == "O" && $table.children[0].children[2].innerText == "O")) {
+                winner = 1
+            }
+
+            //플레이어 X 승리 조건
+            for(i = 0; i < size; i++) {
+                for(j = 0; j < size; j++) {
+                    if($table.children[i].children[j].innerText == "X") {
+                        count++;
+                        if(count == 3) {
+                            winner = 2;
+                            break;
+                        }
+                    } 
+                }
+                count = 0;
+            }
+            for(i = 0; i < size; i++) {
+                for(j = 0; j < size; j++) {
+                    if($table.children[j].children[i].innerText == "X") {
+                        count++;
+                        if(count == 3) {
+                            winner = 2;
+                            break;
+                        }
+                    } 
+                }
+                count = 0;
+            }
+
+            if(($table.children[0].children[0].innerText == "X" && $table.children[1].children[1].innerText == "X" && $table.children[2].children[2].innerText == "X")
+             || ($table.children[2].children[0].innerText == "X" && $table.children[1].children[1].innerText == "X" && $table.children[0].children[2].innerText == "X")) {
+                winner = 2;
+            }
+
+            // 무승부
+            else if(cnt == 9 && winner == 0) {
+                winner = 3;
+            }
+
+            if(winner == 1) {
+                alert("플레이어 O 승리")
+                stop()
+                button()
+            }
+            if(winner == 2) {
+                alert("플레이어 X 승리")
+                stop()
+                button()
+            }
+            if(winner == 3) {
+                alert("무승부")
+                stop()
+                button()
+            }
+
+        }
+        
+
+        function stop () {
+            for(i = 0; i < size; i++) {
+                for(j = 0; j < size; j++) {
+                    $table.children[i].children[j].removeEventListener("click", clickEvent)
+                }
+            }
+        }
+
+
+        function reset() {
+            document.querySelector("#c").innerHTML = "";
+            cnt = 0;
+            winner = 0;
+            turn = true;
+
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    $table.children[i].children[j].innerText = "";
+                    $table.children[i].children[j].addEventListener("click", clickEvent);
+                }
+            }
+        }
+
+        function button() {
+            let $btn = document.createElement("button");
+            $btn.innerText = "다시 시작";
+            $btn.id = "btn";
+            document.querySelector("#c").append($btn);
+            $btn.addEventListener("click", reset);
+        }
+        
+       
+
+        load()
+
+
+    </script>
+</body>
+</html>

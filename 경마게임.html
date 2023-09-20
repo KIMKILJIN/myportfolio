@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+       #header { 
+            text-align: center; 
+            height: 80px;
+            line-height: 80px;
+            background-color: whitesmoke;
+        }
+
+        #headerTagA {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 2;
+            font-size: 30px;
+        }        a {
+            color: lightsteelblue;
+            text-decoration: none;
+        }
+
+    #menu {
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: 0px auto;
+        text-align: center;
+        width: 500px;
+    }
+    #menu td, #menu tr {
+        border: 1px solid black;
+    }
+    .imgs {
+        width: 80px;
+        height: 50px;
+    }
+    h1 {
+        text-align: center;
+    }
+    #game {
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: 0px auto;
+        text-align: center;
+        margin-top: 30px;
+    }
+    #c {
+        margin-top: 30px;
+    }
+    #game tr, #game td{
+        border: 1px solid black;
+        height: 30px;
+        width: 40px;
+    }
+    #red {
+        background-color: red;
+    }
+    #orange {
+        background-color: orange;
+    }
+    #yellow {
+        background-color: yellow;
+    }
+    #green {
+        background-color: green;
+    }
+    #blue {
+        background-color: blue;
+    }
+
+    #c table, #c tr, #c td {
+        border: 1px solid black;
+        margin: 0px auto;
+        border-collapse: collapse;
+        width: 200px;
+    }
+    #c tr, #c td {
+        text-align: center;
+        font-size: 10px;
+    }
+    #print {
+        width: 300px;
+        height: 100px;
+    }
+
+</style>
+<body>
+<!-- ---------------------------- header start ----------------------------- -->
+<div id="header">
+    <h3><a href="index.html" id = "headerTagA">MINI GAME PROJECT</a></h3>
+</div>
+
+<hr width="100%" color="black" size="1" style="margin: 0px auto;">
+<br>
+<!-- ---------------------------- header finish ----------------------------- -->
+    <h1>경마 게임</h1>
+    <div id = "a"></div>  
+    <div id = "b"></div>
+    <div id = "c"></div>
+
+    <script>
+        let $table = document.createElement("table");
+        let xList = [0, 0, 0, 0, 0];
+        let horse = ["red", "orange", "yellow", "green", "blue"];
+        let size = 40;
+        let result = false;
+        function init() {
+            document.querySelector("#a").innerHTML = `
+            <table id = "menu">
+                <tr>
+                    <td colspan="5">1등으로 도착하는 말은 몇 번일까요?</td>
+                </tr>
+                <tr>
+                    <td style="background-color: red;"><input type="radio" class = "num" name = "number">1번</td>
+                    <td style="background-color: orange;"><input type="radio" class = "num" name = "number">2번</td>
+                    <td style="background-color: yellow;"><input type="radio" class = "num" name = "number">3번</td>
+                    <td style="background-color: green;"><input type="radio" class = "num" name = "number">4번</td>
+                    <td style="background-color: blue;"><input type="radio" class = "num" name = "number">5번</td>
+                </tr>
+                <tr>
+                    <td><img src="경마_images/red.png" class = "imgs"></td>
+                    <td><img src="경마_images/orange.png" class = "imgs"></td>
+                    <td><img src="경마_images/yellow.png" class = "imgs"></td>
+                    <td><img src="경마_images/green.png" class = "imgs"></td>
+                    <td><img src="경마_images/blue.png" class = "imgs"></td>
+                </tr>
+                <tr>
+                    <td colspan="5"><button id = "start" onclick="start();this.onclick=null;">선택완료</button></td>
+                </tr>
+            </table>`
+            for(i = 0; i < 5; i++) {
+                let $tr = document.createElement("tr");
+                for(j = 0; j < size; j++) {
+                    let $td = document.createElement("td");
+                    $tr.append($td);
+                }
+                $table.append($tr);
+            }
+            $table.setAttribute("id", "game");
+            document.querySelector("#b").append($table);
+
+            for(i = 0; i < 5; i++) {
+                $table.children[i].children[0].innerText = i + 1;
+            }
+            for(i = 0; i < xList.length; i++) {
+                $table.children[i].children[xList[i]].setAttribute("id", horse[i]);
+            }
+            
+            
+        }
+        let rank = [0, 0, 0, 0, 0];
+        let rank2 = 1;
+        
+        function move() {
+            let count = 0;
+            
+            for(i = 0; i < xList.length; i++) {
+                $table.children[i].children[xList[i]].setAttribute("id", "");
+            }
+            
+            for(i = 0; i < xList.length; i++) {
+                let r = Math.floor(Math.random() * 3) + 1;
+                xList[i] += r;
+            }
+            
+            let rankCount = 0;
+            for(i = 0; i < xList.length; i++) { 
+                if(xList[i] >= size - 1) {
+                    xList[i] = size - 1;
+                    count++;
+
+                }
+                if(xList[i] >= size - 1 && rank[i] == 0) { 
+                    rank[i] = rank2;
+                    rankCount++;
+                }
+            }
+            rank2 += rankCount;
+            
+            for(i = 0; i < xList.length; i++) {
+                $table.children[i].children[xList[i]].setAttribute("id", horse[i]);
+            }
+
+            if(count == 5) {
+                result = true;
+            }
+
+            let pr = false
+            if(result == true) {
+                document.querySelector("#c").style.display = "block";
+                document.querySelector("#c").innerHTML = `
+                <table id = "print">
+                    <tr>
+                        <td class = "printScore">1번</td>
+                        <td class = "printScore">2번</td>
+                        <td class = "printScore">3번</td>
+                        <td class = "printScore">4번</td>
+                        <td class = "printScore">5번</td>
+                    </tr>
+                    <tr>
+                        <td class = "printRank"></td>
+                        <td class = "printRank"></td>
+                        <td class = "printRank"></td>
+                        <td class = "printRank"></td>
+                        <td class = "printRank"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" id = "resultPrint"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" id = "resetButton"><button>다시시작</button></td>
+                    </tr>
+                </table>
+                `
+                document.querySelector("#resetButton").addEventListener("click", reStart);
+
+                for(i = 0; i < rank.length; i++) {
+                    document.querySelectorAll(".printRank")[i].innerText = rank[i] + "등";
+                    if(document.querySelectorAll(".printRank")[i].innerText == "1등") {
+                        document.querySelectorAll(".printScore")[i].style.backgroundColor = "yellow";
+                        document.querySelectorAll(".printRank")[i].style.backgroundColor = "yellow";
+                    }
+                }
+                for(i = 0; i < rank.length; i++) {
+                    if(document.querySelectorAll(".num")[i].checked == true && rank[i] == 1) {
+                        pr = true;
+                    }
+                }
+                if(pr) {
+                    document.querySelector("#resultPrint").innerText = "정답입니다";
+                }
+                else {
+                    document.querySelector("#resultPrint").innerText = "오답입니다";
+                }
+                clearInterval(myInterval);
+            }
+        }
+        
+        function start() {
+            let run = false;
+
+            for(i = 0; i < document.querySelectorAll(".num").length; i++) {
+                if(document.querySelectorAll(".num")[i].checked == true) {
+                    run = true;
+                }
+            }
+            if(run) {
+                myInterval = setInterval(move, 500);
+            }
+            else {
+                alert("말을 선택해주세요.");
+                $table.innerHTML = "";
+                init();
+            }
+            
+        }
+        function reStart() {
+            result = false;
+            $table.innerHTML = ""
+            document.querySelector("#print").innerHTML = ""
+            for(i = 0; i < rank.length; i++) {
+                document.querySelectorAll(".num")[i].checked = false;
+            }
+            document.querySelector("#start").addEventListener("click", start)
+            rank = [0, 0, 0, 0, 0];
+            rank2 = 1;
+            xList = [0, 0, 0, 0, 0];
+            
+            init()
+        }
+        
+        // ----------------------------------------
+        init()
+    </script>
+</body>
+</html>

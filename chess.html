@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess</title>
+    
+    <style>
+        #center {
+            margin: 0 auto;
+            text-align: center;
+        }
+        #chess {
+            border-collapse: collapse;
+            
+        }
+        #chess td {
+            border-radius: 3px;
+            width: 100px;
+            height: 100px;
+            font-size: 70px;
+
+        }
+        .beige {
+            background-color: rgba(118, 150, 86);
+            position: relative;
+        }
+        .brown {
+            background-color: rgba(238, 238, 210);
+        }
+        
+        #selected {
+            background-color: rgba(247, 247, 105);
+        }
+        #movable {
+            background-image: url("chessImages/full-stop.png");
+            background-size: cover;
+            opacity: 50%;
+            cursor: pointer;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+
+        #pr {
+            border: 1px solid black;
+        }
+        #pr td {
+            font-size: 50px;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 1px solid black;
+        }
+        #p2Pawn {
+            width: 350px;
+            text-align: center;
+            margin: 0px auto;
+            
+        }
+        #p1Pawn {
+            width: 350px;
+            text-align: center;
+            margin: 0px auto;
+            
+        }
+
+        #confirmCheck {
+            background-color: black;
+        }
+
+        #mainCenter {
+            float: left;
+        }
+        #prtCheckP2 {
+            margin-left: 20px;
+            float: left;
+            height: 800px;
+            position: relative;
+            top: 50%;
+            transform: translateY(36%);
+        }
+    
+        #chessGame {
+            margin: 0px auto;
+            width: 1200px;
+            align-items: center;
+        
+        }
+        .player {
+            font-size: 50px;
+            font-weight: bold;
+            width: 80px;
+        }
+        .situation1 {
+           height: 50px; 
+           width: 250px;
+           font-size: 30px;
+           word-break:break-all;
+           background-color: rgba(238, 238, 210);
+        }
+
+        #situation {
+            border-collapse: collapse;
+        }
+        .checkMsg {
+            font-size: 40px;
+            font-weight: bold;
+
+        }
+
+        [name = "checked"] {
+            background-color: red;
+        }
+
+        #header { text-align: center; }
+        * {
+        margin: 0;
+        padding: 0;
+       }
+
+       #header {
+
+            text-align: center; 
+            height: 80px;
+            line-height: 80px;
+            background-color: whitesmoke;
+        }
+
+        #headerTagA {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 2;
+            font-size: 30px;
+        }
+
+        
+
+    </style>
+
+</head>
+<body>
+    <!-- ---------------------------- header start ----------------------------- -->
+    <div id="header">
+        <h3><a href="index.html" id = "headerTagA">MINI GAME PROJECT</a></h3>
+    </div>
+
+    <hr width="100%" color="black" size="1" style="margin: 0px auto;">
+    <br>
+    <!-- ---------------------------- header finish ----------------------------- -->
+    <div id = "chessGame">
+        
+        <div id = "mainCenter">
+            <div id = "p1Pawn"></div>
+            <table id="center">
+                <tr>
+                    <td id="chess"></td>
+                </tr>
+            </table>
+            <div id = "p2Pawn"></div>
+            
+        </div>
+        <div id = "right">
+
+            <div id = "prtCheckP2">
+                <table id = "situation">
+                    <tr>
+                        <td  colspan="2" class = "situation1" id = "p1Situation"></td>
+                    </tr>
+                    <tr>
+                        <td class = "player">2P</td>
+                        <td class = "checkMsg"></td>
+
+                    </tr>
+                    <tr>
+                        <td class = "player">1P</td>
+                        <td class = "checkMsg"></td>
+                    </tr>
+                    <tr>
+                        <td  colspan="2" class = "situation1" id = "p2Situation"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="chess.js"></script>
+</body>
+</html>
